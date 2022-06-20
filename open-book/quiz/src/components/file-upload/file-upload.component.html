@@ -1,0 +1,28 @@
+<div>
+  <mat-toolbar *ngIf="hasFile$ | async" class="progress-bar">
+    <mat-progress-bar color="accent" [value]="progress$ | async"></mat-progress-bar>
+    <span class="progress-text">{{ progress$ | async }}%</span>
+  </mat-toolbar>
+  <mat-form-field>
+    <div>
+      <mat-toolbar>
+        <input matInput [value]="fileName$ | async" />
+        <button mat-flat-button
+                color="primary"
+                [disabled]="hasNotFile$ | async"
+                (click)="upload()"
+                i18n
+                *ngIf="false">
+          Upload
+        </button>
+      </mat-toolbar>
+      <input type="file"
+             class="file-input"
+             (change)="selectFile($event)"
+             name="fileInput" />
+    </div>
+  </mat-form-field>
+</div>
+<div *ngIf="hasMessage$ | async" class="message">
+  {{ message$ | async }}
+</div>
